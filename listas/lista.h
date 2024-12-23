@@ -11,12 +11,12 @@ typedef int tipoElemento;
 typedef struct tipoCelda {
 	tipoElemento elemento;
 	struct tipoCelda * sig;
-	} tipoCelda;
+} tipoCelda;
 #endif
 
 typedef struct {
-	tipoCelda * raiz , *ultimo;
-	} Lista;
+	tipoCelda *raiz , *ultimo;
+} Lista;
 
 typedef tipoCelda *tipoPosicion;
 
