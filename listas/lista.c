@@ -328,12 +328,12 @@ int dividirLista(Lista *lOrigen, tipoPosicion p, Lista *lNueva) {
         while (temp->sig != NULL) {
             temp = temp->sig;
         }
-        lNueva->ultimo = temp;  // Actualizar el último nodo de la nueva lista
+        lNueva->ultimo = temp;
     }
 
     // Terminar la lista original en p
     p->sig = NULL;
     lOrigen->ultimo = p;
 
-    return 0;  // División exitosa
+    return 0;  
 }

@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
 	printf("Creando lista vacía: %d\n", creaVacia(&miLista));
 
-	printf("Se crea una lista de %d elementos\n", numElementos);
+	printf("Se crea una lista de %d elementos:\n", numElementos);
 	anula(&miLista);	
 	p = primero(&miLista);
 	for (i = 0; i < numElementos; i++) { 
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	imprime(&miLista);
 	printf("\n\nComienza la ordenación \n");
 	insercion(&miLista);
-	printf("\nLista Ordenada \n");
+	printf("\nLista Ordenada: \n");
 	imprime(&miLista);
 	anula(&miLista);
 
