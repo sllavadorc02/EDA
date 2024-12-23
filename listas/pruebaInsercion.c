@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "lista.h"
 #include "insercion.h"
+#include "lista.h"
+
 
 
 int main(int argc, char *argv[])
