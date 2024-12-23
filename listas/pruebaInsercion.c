@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 		p = siguiente(p,&miLista);
 	}
 	imprime(&miLista);
-	printf("\nComienza la ordenación \n");
+	printf("\n\nComienza la ordenación \n");
 	insercion(&miLista);
 	printf("\nLista Ordenada \n");
 	imprime(&miLista);

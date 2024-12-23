@@ -3,10 +3,9 @@
 #include "lista.h"
 #include "insercion.h"
 
-void insercion(Lista *l){
-    if(l==NULL || vacia(l)==1){
+void insercion(Lista *l) {
+    if (l == NULL || vacia(l) == 1) {
         return;
-    
     }
 
     Lista ordenada, desordenada;
@@ -16,33 +15,36 @@ void insercion(Lista *l){
     creaVacia(&ordenada);
     creaVacia(&desordenada);
 
-    dividirLista(l, primero(l), &desordenada);
+    dividirLista(l, l->raiz->sig, &desordenada);
+    ordenada.raiz=l->raiz;
+    ordenada.ultimo=l->ultimo;
+    
 
-    while(vacia(&desordenada)==0){
-        pos=primero(&desordenada);
-        elemento=recupera(pos, &desordenada);
+    while (desordenada.raiz->sig != NULL) {  // Mientras haya elementos en la lista desordenada
+        
+        tipoCelda *nodoDesordenado = desordenada.raiz->sig;
+        tipoElemento elemento = nodoDesordenado->elemento;
 
-        lugar=primero(&ordenada);
-        while (lugar != fin(&ordenada) && recupera(lugar, &ordenada) < elemento) {
-            lugar = siguiente(lugar, &ordenada);
+        
+        tipoPosicion lugar = ordenada.raiz; 
+         
+        while (lugar->sig != NULL) {         // Verificar si lugar->sig es válido
+            if(lugar->sig->elemento >= elemento){
+                break;
+            }
+            lugar = lugar->sig;  // Avanzamos al siguiente nodo
         }
 
-        traspasarNodo(pos, &desordenada, lugar, &ordenada);
+        // Insertamos el elemento en la posición correcta de la lista ordenada
+        inserta(elemento, lugar, &ordenada);
+        
+        // Ahora, eliminamos el nodo procesado de la lista desordenada
+        desordenada.raiz->sig = nodoDesordenado->sig;  // Avanzamos al siguiente nodo
+        free(nodoDesordenado);
+        
     }
 
-    //anula(l); //original vacía
-    pos = primero(&ordenada);
-    while (pos != fin(&ordenada)) {
-        inserta(recupera(pos, &ordenada), fin(l), l);
-        pos = pos->sig;
-    }
     
-    // Liberar la memoria utilizada por las sublistas
-    anula(&ordenada);
-    destruye(&ordenada);
-    destruye(&desordenada);
-
-
 
 
 }

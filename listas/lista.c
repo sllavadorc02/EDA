@@ -315,60 +315,25 @@ int traspasarNodo(tipoPosicion p, Lista *la, tipoPosicion q, Lista *lb){
 }
 
 
-int dividirLista(Lista *lOrigen, tipoPosicion p, Lista *lNueva){
-    if(lOrigen->raiz ==NULL){
-        return -1;
+int dividirLista(Lista *lOrigen, tipoPosicion p, Lista *lNueva) {
+    if (lOrigen == NULL || lNueva == NULL || p == NULL) {
+        return -1;  
     }
-    
-    tipoCelda *aux=lOrigen->raiz;
-    int encontrado=0;
-    while(aux!=NULL){
-        if(p==aux){
-            encontrado=1;
-            break;
+
+    lNueva->raiz->sig = p->sig;
+    if (p->sig == NULL) {
+        lNueva->ultimo = lNueva->raiz;  // Lista nueva está vacía
+    } else {
+        tipoCelda *temp = lNueva->raiz->sig;
+        while (temp->sig != NULL) {
+            temp = temp->sig;
         }
-
-        aux=aux->sig;
-    
+        lNueva->ultimo = temp;  // Actualizar el último nodo de la nueva lista
     }
 
-    if(encontrado==0){
-        return -2;
-    }
+    // Terminar la lista original en p
+    p->sig = NULL;
+    lOrigen->ultimo = p;
 
-    
-    
-    tipoCelda *lista=lOrigen->raiz;
-    lNueva->raiz=NULL;
-    lNueva->ultimo=NULL;
-    while(aux !=NULL){
-        if(aux==p){
-            lOrigen->ultimo=p;
-            lOrigen->ultimo->sig=NULL;
-
-
-            lNueva->raiz=p->sig;
-            if(lNueva->raiz==NULL){
-                lNueva->ultimo=NULL;
-            }else{
-                tipoCelda *temp= lNueva->raiz;
-                while(temp->sig != NULL){
-                    temp=temp->sig;
-                }
-                lNueva->ultimo=temp;
-
-            }
-
-            return 0;
-
-        }
-
-        aux=aux->sig;
-    }
-    
-
-    //p no encontrado
-    return -3;
-    
-
+    return 0;  // División exitosa
 }
