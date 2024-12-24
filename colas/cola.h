@@ -26,7 +26,8 @@ int colaCreaVacia(Cola *c);
 // de matrices
 int colaVacia(Cola *c);
 
-int colaInsertaC(Cola *c, tipoElemento elemento);
+int colaInserta(Cola *c, tipoElemento elemento);
+void imprimir (Cola *c);
 
 tipoElemento colaSuprime(Cola *c);
 

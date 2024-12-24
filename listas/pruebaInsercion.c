@@ -5,8 +5,7 @@
 
 	//TODO: hay que hacer lo del excel
 
-int main(int argc, char *argv[])
-{   
+int main(int argc, char *argv[]){   
 	Lista miLista;
 	tipoPosicion p;
 	int numElementos = 20, codigoError,i;

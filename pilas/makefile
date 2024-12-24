@@ -1,8 +1,8 @@
-pruebaPila: pruebaPila.o pila.o
-	gcc -g pruebaPila.o pila.o -o pruebaPila
-pruebaPila.o: pruebaPila.c pila.h
-	gcc -g -c pruebaPila.c
+pruebaPilas: pruebaPilas.o pila.o
+	gcc -g pruebaPilas.o pila.o -o pruebaPilas
+pruebaPilas.o: pruebaPilas.c pila.h
+	gcc -g -c pruebaPilas.c
 pila.o: pila.c pila.h
 	gcc -g -c pila.c
 limpiar:
-	rm *.o lista.o
+	rm pruebaPilas.o pila.o
