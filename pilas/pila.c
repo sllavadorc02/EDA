@@ -17,10 +17,10 @@ int pilaCreaVacia(Pila *p){
 
 int pilaVacia(Pila *p){
     if(*p==NULL || p==NULL){
-        return 0;
+        return 1;
     }
     
-    return -1;
+    return 0;
 }
 
 
@@ -55,4 +55,41 @@ tipoElemento pilaSuprime(Pila *p){
 
     return el;
 
+}
+
+
+
+void imprimir(Pila *p){
+    tipoCelda *imprimir;
+
+    if(pilaVacia(p)){
+        printf("La pila esta vacia...");
+    }else{
+        imprimir=*p;
+        while(imprimir!=NULL){
+            printf("%d ", imprimir->elemento);
+            imprimir=imprimir->sig;
+        }
+    }
+
+    printf("\n");
+
+}
+
+
+void liberar(Pila *p) {
+    tipoCelda *aBorrar;
+    if (p == NULL || *p == NULL) {
+        printf("\nPila vacía...\n");
+        return;
+    }
+
+    
+    while (*p != NULL) {
+        aBorrar = *p;       
+        *p = (*p)->sig;     
+        free(aBorrar);      
+    }
+
+    printf("\nPila liberada...\n");
 }

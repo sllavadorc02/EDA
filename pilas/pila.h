@@ -29,4 +29,9 @@ int pilaInserta(Pila *p,tipoElemento elemento);
 tipoElemento pilaSuprime(Pila *p);
 
 
+void imprimir(Pila *p);
+void liberar(Pila *p);
+
+
+
 #endif

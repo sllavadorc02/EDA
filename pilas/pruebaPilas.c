@@ -8,49 +8,34 @@ int main (void){
 
    
 
-    printf("\nSe hace la insercion...");
+    printf("\nSe hace la insercion...\n");
     pilaInserta(&pila, 1);
+    imprimir(&pila);
     pilaInserta(&pila, 2);
+    imprimir(&pila);
     pilaInserta(&pila, 3);
+    imprimir(&pila);
     
     
-
     
-
-    tipoCelda *imprimir;
     printf("\n\nEn la lista hay guardado:\n");
-    
-    if(pilaVacia(&pila)==0){
-        printf("La pila esta vacia...");
-    }else{
-        imprimir=pila;
-        while(imprimir!=NULL){
-            printf("%d ", imprimir->elemento);
-            imprimir=imprimir->sig;
-        }
-    }
+    imprimir(&pila);
     
 
     pilaSuprime(&pila);
-    //pilaSuprime(&pila);
-    //pilaSuprime(&pila);
+    imprimir(&pila);
+    pilaSuprime(&pila);
+    imprimir(&pila);
+    pilaSuprime(&pila);
+    imprimir(&pila);
+    
 
     
     printf("\n\nDespues de suprimir:\n");
-
-    if(pilaVacia(&pila)==0){
-        printf("La pila esta vacia...");
-    }else{
-        imprimir=pila;
-        while(imprimir!=NULL){
-            printf("%d ", imprimir->elemento);
-            imprimir=imprimir->sig;
-        }
-    }
-
+    imprimir(&pila);
     printf("\n");
 
-
+    liberar(&pila);
 
     return 0;
 }
