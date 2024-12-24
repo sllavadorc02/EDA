@@ -14,6 +14,12 @@ insercion.o: insercion.c insercion.h lista.h
 
 lista.o: lista.c lista.h 
 	gcc -g -c lista.c -o lista.o 
+
+medirTyContarInsercion: medirTyContarInsercion.o lista.o insercion.o
+	gcc -g medirTyContarInsercion.o lista.o insercion.o -o medirTyContarInsercion
+
+medirTyContarInsercion.o: medirTyContarInsercion.c lista.h insercion.h
+	gcc -g -c medirTyContarInsercion.c 
 	
 limpiar:
 	rm *.o lista.o	

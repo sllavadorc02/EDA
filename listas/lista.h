@@ -20,6 +20,7 @@ typedef struct {
 
 typedef tipoCelda *tipoPosicion;
 
+extern long int contadorInterno, contadorExterno, contadorMedio;
 int creaVacia(Lista *l);
 int anula(Lista *l);
 int vacia(Lista *l);

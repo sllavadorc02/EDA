@@ -3,6 +3,8 @@
 #include "lista.h"
 #include "insercion.h"
 
+long int contadorInterno, contadorExterno, contadorMedio;
+
 void insercion(Lista *l) {
     if (l == NULL || vacia(l) == 1) {
         return;
@@ -25,12 +27,13 @@ void insercion(Lista *l) {
         tipoCelda *nodoDesordenado = desordenada.raiz->sig;
         tipoElemento elemento = nodoDesordenado->elemento;
         tipoPosicion lugar = ordenada.raiz; 
-         
+        contadorExterno++;
         while (lugar->sig != NULL) {         
             if(lugar->sig->elemento >= elemento){
                 break;
             }
             lugar = lugar->sig; 
+            contadorInterno++;
         }
 
         inserta(elemento, lugar, &ordenada);

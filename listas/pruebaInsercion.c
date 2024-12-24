@@ -3,7 +3,7 @@
 #include "insercion.h"
 #include "lista.h"
 
-	//TODO: hay que hacer lo del excel
+	
 
 int main(int argc, char *argv[]){   
 	Lista miLista;
