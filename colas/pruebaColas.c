@@ -30,7 +30,7 @@ int main (void){
     printf("\n\nDespues de suprimir:\n");
     imprimir(&cola);
 
-
     printf("\n");
+    liberar(&cola);
     return 0;
 }

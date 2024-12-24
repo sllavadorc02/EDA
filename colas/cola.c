@@ -86,3 +86,22 @@ void imprimir(Cola *c){
 
 
 }
+
+
+void liberar(Cola *c) {
+    tipoCelda *aBorrar;
+    if (c->fondo == NULL || c->frente == NULL) {
+        printf("\nCola vacía...\n");
+        return;
+    }
+
+    
+    while (c->frente != NULL) {
+        aBorrar = c->frente;       
+        c->frente = c->frente->sig;     
+        free(aBorrar);      
+    }
+
+    c->fondo=NULL;
+    printf("\nCola liberada...\n");
+}

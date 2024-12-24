@@ -30,5 +30,6 @@ int colaInserta(Cola *c, tipoElemento elemento);
 void imprimir (Cola *c);
 
 tipoElemento colaSuprime(Cola *c);
+void liberar(Cola *c);
 
 #endif
