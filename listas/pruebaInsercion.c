@@ -3,7 +3,7 @@
 #include "insercion.h"
 #include "lista.h"
 
-
+	//TODO: hay que hacer lo del excel
 
 int main(int argc, char *argv[])
 {   
@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 	imprime(&miLista);
 	anula(&miLista);
 
+	
 	destruye(&miLista); 
 	return 0;
 }
