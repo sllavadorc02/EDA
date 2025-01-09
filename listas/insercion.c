@@ -10,39 +10,44 @@ void insercion(Lista *l) {
         return;
     }
 
-    Lista ordenada, desordenada;
-    tipoPosicion pos, lugar;
+    Lista desordenada;
     tipoElemento elemento;
 
-    creaVacia(&ordenada);
+    // Crear las listas vacías
     creaVacia(&desordenada);
 
-    dividirLista(l, l->raiz->sig, &desordenada);
-    ordenada.raiz=l->raiz;
-    ordenada.ultimo=l->ultimo;
+    // Dividir la lista original en ordenada y desordenada
+    dividirLista(l, primero(l), &desordenada);  
+
     
+    while(vacia(&desordenada)==0){
 
-    while (desordenada.raiz->sig != NULL) { 
-        
-        tipoCelda *nodoDesordenado = desordenada.raiz->sig;
-        tipoElemento elemento = nodoDesordenado->elemento;
-        tipoPosicion lugar = ordenada.raiz; 
-        contadorExterno++;
-        while (lugar->sig != NULL) {         
-            if(lugar->sig->elemento >= elemento){
-                break;
+        tipoPosicion lugar=primero(l);
+        tipoPosicion primeraDesordenada=primero(&desordenada);
+
+        if(recupera(primeraDesordenada, &desordenada) > recuperaUltimo(l)){
+    
+            int error= traspasarNodo(primeraDesordenada, &desordenada, localiza(recuperaUltimo(l), l), l);
+            if(error != 0){
+                printf("Hubo un error: %d", error);
             }
-            lugar = lugar->sig; 
-            contadorInterno++;
-        }
+            
 
-        inserta(elemento, lugar, &ordenada);
-        desordenada.raiz->sig = nodoDesordenado->sig;  
-        free(nodoDesordenado);
+        }else{
+
+            while( siguiente(lugar,l) !=NULL && (recupera(lugar, l) < recupera(primeraDesordenada, &desordenada))){
+                lugar=siguiente(lugar, l);
+            }
+
+            int error= traspasarNodo(primeraDesordenada, &desordenada, lugar, l);
+            if(error != 0){
+                printf("Hubo un error: %d", error);
+            }
+        }
         
+
     }
 
     
-
 
 }

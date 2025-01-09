@@ -186,19 +186,16 @@ tipoPosicion fin(Lista *l){
 
 void imprime(Lista *l){
     tipoCelda *aImprimir;
-    int posicion;
+
     
     if (l == NULL || l->raiz == NULL) {
         return;
     }else {
-        posicion = 1;
         aImprimir = l->raiz->sig;
         while (aImprimir != NULL) {
-            //printf("Valor: %d en posición: %d\n",aImprimir->elemento, posicion++);
             printf(" %d ",aImprimir->elemento);
             aImprimir = aImprimir->sig;
         }
-//        printf("%d valores en la lista\n",posicion-1);
     }
 }
 
@@ -217,101 +214,32 @@ int destruye(Lista *l){
 
 
 tipoElemento recuperaUltimo(Lista *l){
-    tipoCelda *aux=l->raiz;
     if(l->raiz == NULL){
         return -1;
     }else{
-        while(aux->sig != NULL ){
-            aux=aux->sig;
-        }
-
-        l->ultimo=aux;
-        
-        return aux->elemento; 
+        return l->ultimo->elemento; 
     }
 
 }
 
 
 int traspasarNodo(tipoPosicion p, Lista *la, tipoPosicion q, Lista *lb){
-    if(la == NULL || lb == NULL || p==NULL){
+    if(la == NULL || lb == NULL){
         return -1;
-    }
-
-    tipoCelda *aux1=la->raiz;
-    tipoCelda *anterior1=NULL;
-    int encontrado1=0;
-
-
-    while(aux1!=NULL){
-        if(aux1==p){
-            encontrado1=1;
-            break;
-        }
-        anterior1=aux1;
-        aux1=aux1->sig;
-    }
-
-    if(encontrado1==0){
+    }else if(la->raiz == NULL || lb->raiz ==NULL){
         return -2;
-    }
-
-    if(anterior1==NULL){
-        la->raiz=aux1->sig;
-
+    }else if(p==NULL || q==NULL || p->sig ==NULL){
+        return -3;
     }else{
-        anterior1->sig=aux1->sig;
-    }
+        tipoPosicion aux=p->sig;
+        p->sig=aux->sig;
+        aux->sig=q->sig;
+        q->sig=aux;
 
-
-    if(la->ultimo==aux1){
-        la->ultimo=anterior1;
-    }
-
-
-   
-
-    if(lb->raiz==NULL){
-        lb->raiz=aux1;
-        aux1->sig=NULL;
-        lb->ultimo=aux1;
-    }else if(q==NULL){
-        lb->ultimo->sig=aux1;
-        aux1->sig=NULL;
-        lb->ultimo=aux1;
-    }else{
-        tipoCelda *aux2=lb->raiz;
-        tipoCelda *anterior2=NULL;
-        int encontrado2=0;
-        
-        while(aux2!=NULL){
-            if(aux2==q){
-                encontrado2=1;
-                break;
-            }
-            anterior2=aux2;
-            aux2=aux2->sig;
-        }
-    
-
-        if(encontrado2==0){
-            return -2;
-        }
-
-
-        if(anterior2==NULL){
-            aux1->sig=lb->raiz;
-            lb->raiz=aux1;
-        }else{
-            anterior2->sig=aux1;
-            aux1->sig=aux2;
-        }
-
+        return 0;
 
     }
 
-
-    return 0;
 }
 
 
@@ -320,20 +248,20 @@ int dividirLista(Lista *lOrigen, tipoPosicion p, Lista *lNueva) {
         return -1;  
     }
 
-    lNueva->raiz->sig = p->sig;
-    if (p->sig == NULL) {
-        lNueva->ultimo = lNueva->raiz;  // Lista nueva está vacía
-    } else {
-        tipoCelda *temp = lNueva->raiz->sig;
-        while (temp->sig != NULL) {
-            temp = temp->sig;
-        }
-        lNueva->ultimo = temp;
+    if (lOrigen->raiz == NULL || lOrigen->raiz->sig == NULL) {
+        return -2; 
     }
 
-    // Terminar la lista original en p
-    p->sig = NULL;
-    lOrigen->ultimo = p;
+    tipoPosicion q = p->sig;  
+    
+    if (q == NULL) {
+        return 0;  
+    }
 
-    return 0;  
+    lNueva->raiz->sig=q->sig;
+    lNueva->ultimo=lOrigen->ultimo;
+    lOrigen->ultimo=q;
+    lOrigen->ultimo->sig=NULL;
+
+    return 0;
 }
