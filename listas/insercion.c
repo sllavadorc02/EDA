@@ -11,9 +11,8 @@ void insercion(Lista *l) {
     }
 
     Lista desordenada;
-    tipoElemento elemento;
 
-    // Crear las listas vacías
+    // Crear la lista vacía
     creaVacia(&desordenada);
 
     // Dividir la lista original en ordenada y desordenada
@@ -21,27 +20,28 @@ void insercion(Lista *l) {
 
     
     while(vacia(&desordenada)==0){
-
+        contadorExterno++;
         tipoPosicion lugar=primero(l);
         tipoPosicion primeraDesordenada=primero(&desordenada);
 
         if(recupera(primeraDesordenada, &desordenada) > recuperaUltimo(l)){
-    
+            
             int error= traspasarNodo(primeraDesordenada, &desordenada, localiza(recuperaUltimo(l), l), l);
             if(error != 0){
-                printf("Hubo un error: %d", error);
+                printf("Hubo un error: %d\n", error);
             }
-            
+            contadorInterno++;
 
         }else{
-
-            while( siguiente(lugar,l) !=NULL && (recupera(lugar, l) < recupera(primeraDesordenada, &desordenada))){
+            
+            while(recupera(lugar, l) < recupera(primeraDesordenada, &desordenada)){
                 lugar=siguiente(lugar, l);
+                contadorInterno++;
             }
-
+            
             int error= traspasarNodo(primeraDesordenada, &desordenada, lugar, l);
             if(error != 0){
-                printf("Hubo un error: %d", error);
+                printf("Hubo un error: %d\n", error);
             }
         }
         
@@ -51,3 +51,5 @@ void insercion(Lista *l) {
     
 
 }
+
+
